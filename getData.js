@@ -8,13 +8,42 @@ $('document').ready(function(){
 	$("#datepicker").datepicker("option","dateFormat", "dd.mm.yy");
 	$("#datepicker").val(today);
 
+	$("#insertNew").click(function(event) {
+		console.log("clicked");
+		var storeName = $("#storeName").val();
+		var amount = $("#amount").val();
+		var type = $("#type").val();
+		var currencyType = $("#curr").val();
+		
+		day = $(this).datepicker( "getDate" ).getDate();
+		month = $(this).datepicker( "getDate" ).getMonth() + 1;
+		var year = $(this).datepicker( "getDate" ).getFullYear();
+		today = ( year + '-' + (month<10 ? '0' : '') + month + '-' + (day< 10 ? '0' : '') + day);
+
+		$.ajax({
+			url: 'insertReciept.php',
+			type: 'GET',
+			data: {storeName: storeName, amount: amount, date: today, type: type, currency: curr},
+		})
+		.done(function(e) {
+			console.log(e);
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+		
+	});
+
 
 	$("#datepicker").change(function(){
 		day = $(this).datepicker( "getDate" ).getDate();
 		month = $(this).datepicker( "getDate" ).getMonth() + 1;
 		var year = $(this).datepicker( "getDate" ).getFullYear();
 		today = ( year + '-' + (month<10 ? '0' : '') + month + '-' + (day< 10 ? '0' : '') + day);
-		    	//console.log(today);
+
 		var sum = 0;
 		var pickedDate = today;
 		var results = new Array();

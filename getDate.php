@@ -111,5 +111,9 @@
 				echo "<p>" . $e->getMessage() . "</p>";
 			}
 		}
+
+		function insertReciept($storeName, $amount, $currency, $date, $type){
+			echo "yes";
+		}
 	}
 ?>

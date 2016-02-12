@@ -46,9 +46,7 @@ $('document').ready(function(){
 	});
 
 	var currcurr = '';
-	var availCurr = [];
 	$("#curr").keyup(function(event) {
-		availCurr = [];
 		currcurr = $("#curr").val();
 		$.ajax({
 			url: 'getCurrency.php',
@@ -75,15 +73,19 @@ $('document').ready(function(){
 	});
 
 	var storeHint = '';
-	$("#storeName").keypress(function(event) {
+	$("#storeName").keyup(function(event) {
 		storeHint = $("#storeName").val();
 		$.ajax({
 			url: 'callGetStoreName.php',
 			type: 'GET',
+			dataType: 'json',
 			data: {storeHint: storeHint},
 		})
 		.done(function(returnData) {
-			console.log("success");
+			$("#storeName").autocomplete({
+				source:returnData
+			});
+			console.log(returnData);
 		})
 		.fail(function() {
 			console.log("error");
@@ -93,26 +95,33 @@ $('document').ready(function(){
 		});
 		
 	});
+
+	var typeName = '';
+	$("#type").keyup(function(event) {
+		typeName = $("#type").val();
+		$.ajax({
+			url: 'callGetTypeList.php',
+			type: 'GET',
+			dataType: 'json',
+			data: {typeName: typeName},
+		})
+		.done(function(returnData) {
+			$("#type").autocomplete({
+				source:returnData
+			});
+			console.log(returnData);
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+		
+	});
+
 });
 
-function getCurrencyMatch($curr){
-	$.ajax({
-		url: '/path/to/file',
-		type: 'default GET (Other values: POST)',
-		dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
-		data: {param1: 'value1'},
-	})
-	.done(function() {
-		console.log("success");
-	})
-	.fail(function() {
-		console.log("error");
-	})
-	.always(function() {
-		console.log("complete");
-	});
-	
-}
 
 
 

@@ -61,9 +61,30 @@
 				$stm = $conn->prepare("SELECT `store`.`storeName` FROM `store` WHERE `storeName` LIKE ':date%';");
 				$stm->bindParam(":date", $date);
 				$stm->execute();
+				$arr = array();
 				foreach($stm as $row){
-					echo($row[0]);
+					$arr[] = $row[0];
 				}
+				echo json_encode($row[0]);
+			} catch (PDOException $e) {
+				echo "<p>" . $e->getMessage() . "</p>";
+			}
+		}
+
+		function getCurrencyList($curr){
+			$curr = strtoupper($curr);
+			$curr = "$curr%";
+			
+			$conn = new PDO("mysql:host=".self::$host.";dbname=".self::$dbName.";charset=utf8;",self::$user,self::$pass);
+			try {
+				$stm = $conn->prepare("SELECT `currency`.`currencyAcr` FROM `currency` WHERE `currencyAcr` LIKE :curr ;");
+				$stm->bindParam(":curr", $curr);
+				$stm->execute();
+				$arr = array();
+				foreach($stm as $row){
+					$arr[] = $row[0];
+				}
+				echo json_encode($arr);
 			} catch (PDOException $e) {
 				echo "<p>" . $e->getMessage() . "</p>";
 			}

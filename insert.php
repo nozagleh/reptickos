@@ -38,7 +38,7 @@
 				<div class="container">
 					<form action="bullshit.php">
 						<input name="storeName" id ="storeName" class="add" placeholder="Name of Store"/><br />
-						<input name="amount" class="add medium_input" placeholder="Amount"/><input name="currency" class="add small_input" placeholder="SEK"/><br />
+						<input name="amount" class="add medium_input" placeholder="Amount"/><input name="currency" id="curr" class="add small_input" placeholder="SEK"/><br />
 						<input name="type" class="add" placeholder="Type of Reciept"/><br />
 						<button type="submit">Add</button>
 					</form>

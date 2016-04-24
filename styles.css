@@ -72,6 +72,7 @@ h5{font-size: 2.5em; font-weight: 400}
 	padding: 15px 30px;
 }
 .header_menu ul li:hover{background: url('triangle2.png') no-repeat 50% 115%;}
+.active{background: url('triangle2.png') no-repeat 50% 115%;}
 .header_menu ul li a{
 	font-weight: 700;
 	position: relative;
